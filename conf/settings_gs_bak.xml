@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<settings xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+    <!-- localRepository是设置本地仓库地址的。默认位置为: ${user.home}/.m2/repository/ -->
+    <!-- Windows 参考格式： -->
+    <!-- Linux 参考格式：<localRepository>$HOME/repository</localRepository> -->
+    <localRepository>d:/01_opensource/maven-lib-repo</localRepository>
+    <servers>
+
+        <server>
+            <id>snapshots</id>
+            <username>deployment</username>
+            <password>{I3tdMEzuE00HXbvCcb4FQIF6VjaqpQWxO1uWI9HsqAY=}</password>
+        </server>
+
+        <server>
+            <id>releases</id>
+            <username>deployment</username>
+            <password>{I3tdMEzuE00HXbvCcb4FQIF6VjaqpQWxO1uWI9HsqAY=}</password>
+        </server>
+
+    </servers>
+
+    <profiles>
+        <profile>
+            <id>new-YooliNexus</id>
+            <repositories>
+                <repository>
+                    <id>new-YooliNexus</id>
+                    <url>http://maven.youjie.com/content/groups/public/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                        <!-- always , daily (default), interval:X (where X is an integer in minutes) or never. -->
+                        <updatePolicy>daily</updatePolicy>
+                        <checksumPolicy>warn</checksumPolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <checksumPolicy>fail</checksumPolicy>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>new-YooliNexus</id>
+                    <url>http://maven.youjie.com/content/groups/public/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                        <checksumPolicy>warn</checksumPolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <checksumPolicy>fail</checksumPolicy>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+
+        <profile>
+            <id>jdk-1.8</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <jdk>1.8</jdk>
+            </activation>
+            <properties>
+                <maven.compiler.source>1.8</maven.compiler.source>
+                <maven.compiler.target>1.8</maven.compiler.target>
+                <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+            </properties>
+        </profile>
+		<profile>
+		<id>sonar</id>
+            <properties>
+				<sonar.jdbc.url>
+					jdbc:mysql://192.168.50.161:3306/zhen?useUnicode=true&amp;characterEncoding=utf8
+				</sonar.jdbc.url>
+				<sonar.jdbc.username>user_zhen</sonar.jdbc.username>
+				<sonar.jdbc.password>zhen1112</sonar.jdbc.password>
+				<sonar.host.url>
+					http://192.168.50.161:8588/
+				</sonar.host.url>
+			</properties>
+	   </profile>
+    </profiles>
+
+    <activeProfiles>
+        <activeProfile>new-YooliNexus</activeProfile>
+        <activeProfile>jdk-1.8</activeProfile>
+        <activeProfile>sonar</activeProfile>
+    </activeProfiles>
+
+</settings>
+
